@@ -38,7 +38,6 @@ def def_face_recognition_model(class_indices):
     adam = tf.keras.optimizers.Adam()
     model.compile(loss='sparse_categorical_crossentropy',optimizer=adam,metrics=['accuracy'])
     model.person_name = {v:k for k,v in class_indices.items()}
-    model.person_name[-1] = "unkonwn"
     print(model.person_name)
     return model
 
@@ -559,7 +558,7 @@ def InceptionResNetV2():
 	model = Model(inputs, x, name='inception_resnet_v1')
 
 	return model
-
+dataset_folder = './dataset/'
 # Create the FaceNet model
 facenet = InceptionResNetV2()
 facenet.load_weights('facenet_weights.h5')
@@ -569,7 +568,6 @@ detector = mtcnn.MTCNN()
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator()
 valid_datagen = tf.keras.preprocessing.image.ImageDataGenerator()
 
-dataset_folder = './9-twice-member/'
 train_generator = train_datagen.flow_from_directory(dataset_folder +'train',batch_size=1)
 valid_generator = train_datagen.flow_from_directory(dataset_folder +'val',batch_size=1)
 
@@ -597,6 +595,6 @@ plt.xlabel('epoch')
 plt.tight_layout()
 plt.show()
 
-model.save('face_model.twice')
+model.save('face_model.dataset')
 with open('face_model.pickle','wb') as f:
     pickle.dump(model.person_name,f)
