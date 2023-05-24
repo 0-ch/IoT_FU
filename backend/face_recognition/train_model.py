@@ -563,6 +563,7 @@ dataset_folder = './dataset/'
 facenet = InceptionResNetV2()
 facenet.load_weights('facenet_weights.h5')
 facenet.summary()
+facenet.save('facenet_model.h5')
 detector = mtcnn.MTCNN()
 
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator()
@@ -595,6 +596,7 @@ plt.xlabel('epoch')
 plt.tight_layout()
 plt.show()
 
-model.save('face_model.dataset')
+# model.save('face_model.dataset')
 with open('face_model.pickle','wb') as f:
     pickle.dump(model.person_name,f)
+model.save('face_model.h5')

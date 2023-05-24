@@ -8,9 +8,11 @@ def get_face_embedding(facenet,face_image):
     return embedding
 flag = False
 detector = mtcnn.MTCNN()
-cmodel = tf.keras.models.load_model('face_model.dataset')
+# cmodel = tf.keras.models.load_model('face_model.dataset')
+cmodel = tf.keras.models.load_model('face_model.h5')
 print("load face_model.dataset finish")
-facenet = tf.keras.models.load_model('facenet_model')
+# facenet = tf.keras.models.load_model('facenet_model')
+facenet = tf.keras.models.load_model('facenet_model.h5')
 print("load facenet_model finish")
 with open('face_model.pickle','rb') as f:
     cmodel.person_name = pickle.load(f)
